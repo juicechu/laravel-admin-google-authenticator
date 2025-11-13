@@ -10,7 +10,7 @@
 </style>
 <div class="box box-info">
     <div class="box-header with-border">
-        <h3 class="box-title">Two-Factor Authentication</h3>
+        <h3 class="box-title">两步验证</h3>
     </div>
     <div class="box-body">
         <div class="row">
@@ -21,14 +21,14 @@
                             <i class="fa fa-info-circle"></i>
                         </h4>
                         <h5>
-                            Fitur ini digunakan untuk meningkatkan proteksi terhadap akun anda. 
-                            Sebagai langkah awal, anda dapat mendownload aplikasi Google Authenticator pada handphone anda
+                            此功能用于增强您的账户安全保护。 
+                            首先，您可以在手机上下载 Google Authenticator 应用程序。
                         </h5>
                         <h5>
-                            Untuk memulai, silahkan mendownload aplikasi Google Authenticator pada handphone anda
+                            要开始，请在手机上下载 Google Authenticator 应用程序。
                         </h5>
                         <h5>
-                            Kemudian dilanjutkan dengan aktivasi sesuai langkah - langkah berikut
+                            然后按照以下步骤进行激活。
                         </h5>
                     </div>
                 </div>
@@ -37,32 +37,32 @@
                         @csrf
                         <ol>
                             <li>
-                                <p class="mb-0"><strong>Pendaftaran Pengamanan akun</strong></p>
+                                <p class="mb-0"><strong>账户安全注册</strong></p>
                                 <div class="text-left mb-3">
-                                    <label for="img">Scan QR Code dibawah ini menggunakan Aplikasi Google Authenticator</label><br>
+                                    <label for="img">使用 Google Authenticator 应用扫描下方二维码</label><br>
                                     <img class="img img-reponsive" src="data:image/png;base64,{{ $qrCodeUrl }}" alt="QR Code">
-                                    <p class="mt-2 mb-1">atau dengan memasukkan kode berikut ini</p>
+                                    <p class="mt-2 mb-1">或输入以下代码</p>
                                     <label for="img"><b>{{ $secret }}</b></label><br>
                                 </div>
                             </li>
                             <li>
-                                <p class="mb-0"><strong>Aktivasi 2 Factor Authentication</strong></p>
+                                <p class="mb-0"><strong>激活两步验证</strong></p>
                                 <div class="text-left mb-3">
-                                    <label for="one_time_password">Masukan kode yang tertera pada aplikasi anda</label><br>
+                                    <label for="one_time_password">输入应用中显示的验证码</label><br>
                                     <div class="form-group">
                                         <input type="hidden" name="{{config('google2fa.otp_secret_column')}}" value="{{ $secret }}">
-                                        <input type="text" class="form-control" name="{{config('google2fa.otp_input')}}" placeholder="Enter 6-digit code" required>
+                                        <input type="text" class="form-control" name="{{config('google2fa.otp_input')}}" placeholder="输入6位验证码" required>
                                     </div>
                                     <button type="submit" class="btn btn-info submit btn-sm mt-2">
-                                        <i class="fa fa-floppy"></i> Aktifkan
+                                        <i class="fa fa-floppy"></i> 激活
                                     </button>
                                 </div>
                             </li>
                             <li>
-                                <p class="mb-3"><strong>Selanjutnya, anda akan diarahkan ke halaman verifikasi dan masukkan kembali kode yang tertera pada aplikasi</strong></p>
+                                <p class="mb-3"><strong>接下来，您将被引导到验证页面，再次输入应用中显示的验证码</strong></p>
                             </li>
                             <li>
-                                <p class="mb-3"><strong>Pengaturan pengamanan akun telah selesai</strong></p>
+                                <p class="mb-3"><strong>账户安全设置完成</strong></p>
                             </li>
                         </ol>
                     </form>
@@ -70,15 +70,15 @@
             @else
                 <div class="col-md-12">
                     <div class="alert alert-success">
-                        <i class="fa fa-check"></i> Akun anda telah terhubung dengan pengamanan tingkat lanjut
+                        <i class="fa fa-check"></i> 您的账户已启用高级安全保护
                     </div>
                     <form id="disable2FAForm">
                         @csrf
                         <div class="form-group">
-                            <label>Untuk menonaktifkan 2 Factor Authentication, masukan kode pada aplikasi Google Authenticator</label>
-                            <input type="text" class="form-control" name="{{config('google2fa.otp_input')}}" placeholder="Masukan 6-digit kode" required>
+                            <label>要关闭两步验证，请输入 Google Authenticator 应用中的验证码</label>
+                            <input type="text" class="form-control" name="{{config('google2fa.otp_input')}}" placeholder="输入6位验证码" required>
                         </div>
-                        <button type="submit" class="btn btn-danger">Non Aktifkan 2FA</button>
+                        <button type="submit" class="btn btn-danger">关闭两步验证</button>
                     </form>
                 </div>
             @endif

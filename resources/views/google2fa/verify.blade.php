@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>2FA Verification | {{ config('admin.title') }}</title>
+    <title>两步验证 | {{ config('admin.title') }}</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     
     @if(!is_null($favicon = Admin::favicon()))
@@ -35,7 +35,7 @@
         <a href="{{ admin_url('/') }}"><b>{{ config('admin.name') }}</b></a>
     </div>
     <div class="login-box-body">
-        <p class="login-box-msg">Google Two-Factor Authentication</p>
+        <p class="login-box-msg">Google 两步验证</p>
         <p class="login-box-msg text-bold">{{ auth()->user()->name }}</p>
         <form id="2faFormVerify" action="{{ admin_url('2fa/verify') }}" method="post">
             <div class="form-group has-feedback {!! !$errors->has(config('google2fa.otp_input')) ?: 'has-error' !!}">
@@ -44,14 +44,14 @@
                         <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i>{{$message}}</label><br>
                     @endforeach
                 @endif
-                <input type="text" class="form-control text-center" placeholder="Enter the 6-digit code Google Authenticator" name="{{config('google2fa.otp_input')}}" required>
+                <input type="text" class="form-control text-center" placeholder="输入 Google Authenticator 的6位验证码" name="{{config('google2fa.otp_input')}}" required>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
                 <div class="col-xs-4"></div>
                 <div class="col-xs-4">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Verify</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">验证</button>
                 </div>
                 <div class="col-xs-4"></div>
             </div>
