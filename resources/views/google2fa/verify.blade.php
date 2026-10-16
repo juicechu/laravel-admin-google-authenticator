@@ -85,11 +85,17 @@
                     window.location.href = "{{admin_url('/')}}";
                 },
                 error: function(response) {
-                    if (response.responseJSON.message) {
-                        let message = "";
-                        $.each(response.responseJSON.message, function(k, v) {
-                            message += v + '<br>';
-                        });
+                    var msg = response.responseJSON &&
+                        (response.responseJSON.message || response.responseJSON.error);
+                    if (msg) {
+                        var message = "";
+                        if (typeof msg === 'string') {
+                            message = msg;
+                        } else {
+                            $.each(msg, function(k, v) {
+                                message += v + '<br>';
+                            });
+                        }
 
                         toastr["error"](message);
                     }

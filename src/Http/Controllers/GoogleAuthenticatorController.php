@@ -96,7 +96,10 @@ class GoogleAuthenticatorController extends BaseController
             return redirect()->route('admin.home');
         }
 
-        return view('google2fa::verify');
+        // Views are loaded under the 'admin' namespace (see ServiceProvider),
+        // so resolve the verify view from config instead of a hard-coded
+        // 'google2fa::' namespace that is never registered.
+        return view(config('google2fa.view'));
     }
 
     /**

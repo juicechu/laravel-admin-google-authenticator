@@ -63,7 +63,12 @@ class GoogleAuthenticatorServiceProvider extends ServiceProvider
             __DIR__.'/../config/google2fa.php', 'google2fa'
         );
 
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        // Apps that keep the 2FA secret elsewhere (e.g. an existing column)
+        // can opt out by setting config('google2fa.migrations') to false,
+        // which prevents this migration from adding a duplicate column.
+        if (config('google2fa.migrations', true)) {
+            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        }
     }
 
     /**

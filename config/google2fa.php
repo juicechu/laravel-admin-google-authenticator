@@ -5,7 +5,14 @@ return [
      * Enable / disable Google2FA.
      */
     'enabled' => env('ADMIN_2FA_ENABLED', true),
-    
+
+    /*
+     * Whether the package migration (adds a google2fa_secret column to the
+     * admin users table) should be registered. Apps that store the secret in
+     * an existing column must set this to false.
+     */
+    'migrations' => true,
+
     /*
      * Lifetime in minutes.
      */
