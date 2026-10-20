@@ -21,7 +21,24 @@ class Google2FAMiddleware
         }
 
         $user = auth()->user();
-        if (!$user || !$user->google2faIsEnabled()) {
+        if (!$user) {
+            return $next($request);
+        }
+
+        // When mandatory, an admin without a secret must enroll before using
+        // the panel. Only the 2FA routes themselves stay reachable (setting /
+        // enable / disable / verify) so the enrollment flow cannot loop back
+        // into this redirect.
+        if (config('google2fa.mandatory', false) && !$user->google2faIsEnabled()) {
+            if (!$request->routeIs('admin.2fa.*')) {
+                return redirect()->route('admin.2fa.settings');
+            }
+
+            return $next($request);
+        }
+
+        // Without a secret there is nothing to challenge: pass through.
+        if (!$user->google2faIsEnabled()) {
             return $next($request);
         }
 

@@ -7,6 +7,12 @@ return [
     'enabled' => env('ADMIN_2FA_ENABLED', true),
 
     /*
+     * Require every admin to enroll: when true, admins without a secret key
+     * are redirected to the 2FA settings page until they enable it.
+     */
+    'mandatory' => env('ADMIN_2FA_MANDATORY', false),
+
+    /*
      * Whether the package migration (adds a google2fa_secret column to the
      * admin users table) should be registered. Apps that store the secret in
      * an existing column must set this to false.
