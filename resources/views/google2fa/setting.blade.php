@@ -11,6 +11,9 @@
 <div class="box box-info">
     <div class="box-header with-border">
         <h3 class="box-title">两步验证</h3>
+        <a id="2fa-logout" href="{{ admin_url('auth/logout') }}" class="btn btn-default btn-sm pull-right">
+            <i class="fa fa-sign-out"></i> 退出登录
+        </a>
     </div>
     <div class="box-body">
         <div class="row">

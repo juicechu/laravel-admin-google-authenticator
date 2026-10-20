@@ -25,6 +25,12 @@ class Google2FAMiddleware
             return $next($request);
         }
 
+        // Logout must always stay reachable: a user who does not want to
+        // continue the 2FA steps must be able to sign out instead.
+        if ($request->routeIs('admin.logout')) {
+            return $next($request);
+        }
+
         // When mandatory, an admin without a secret must enroll before using
         // the panel. Only the 2FA routes themselves stay reachable (setting /
         // enable / disable / verify) so the enrollment flow cannot loop back

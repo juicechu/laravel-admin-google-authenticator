@@ -56,6 +56,11 @@
                 <div class="col-xs-4"></div>
             </div>
         </form>
+        <div class="text-center" style="margin-top: 15px;">
+            <a id="2fa-logout" href="{{ admin_url('auth/logout') }}" class="btn btn-default btn-block btn-flat">
+                <i class="fa fa-sign-out"></i> 退出登录
+            </a>
+        </div>
     </div>
 </div>
 
